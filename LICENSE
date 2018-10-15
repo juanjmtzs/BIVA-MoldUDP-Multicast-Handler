@@ -1,11 +1,16 @@
 Copyright (C) 2018 Juan J. Martínez
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+All rights reserved. This complete software or any portion thereof
+can be used as reference but may not be reproduced in any manner 
+whatsoever without the express written permission of the owner.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+The purpose of this is to be consulted and used as a referece of 
+functionallyty.
+
+Developed in Mexico City
+First version, 2018
+
+ @author Juan J. Martínez
+ @email juanjmtzs@gmail.com
+ @phone +52-1-55-1247-8044
+ @linkedin https://www.linkedin.com/in/juanjmtzs/
