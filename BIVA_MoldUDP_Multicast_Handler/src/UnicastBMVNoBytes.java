@@ -1,9 +1,26 @@
+/*
+ * Copyright (C) 2018 Juan J. Martínez
+ * 
+ * All rights reserved. This complete software or any portion thereof
+ * can be used as reference but may not be reproduced in any manner 
+ * whatsoever without the express written permission of the owner.
+ * 
+ * The purpose of this is to be consulted and used as a referece of 
+ * functionallyty.
+ * 
+ * Developed in Mexico City
+ * First version, 2018
+ *
+ */
 
 /**
  *
- * @author Juan Jesús Martínez Serrano / juanjmtzs@gmail.com
+ * @author Juan J. Martínez
+ * @email juanjmtzs@gmail.com
+ * @phone +52-1-55-1247-8044
+ * @linkedin https://www.linkedin.com/in/juanjmtzs/
  *
- * */
+ */
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -58,12 +75,6 @@ public class UnicastBMVNoBytes {
     private static byte session[];
     public static String firstMessage = "", quantity = "", security = "", type = "";
 
-    /**
-     *
-     * @author Juan Jesús Martínez Serrano / juanjmtzs@gmail.com
-     *
-     *
-     */
     public UnicastBMVNoBytes() {
         Username = null;
         Password = null;
@@ -202,7 +213,7 @@ public class UnicastBMVNoBytes {
         }
     }
 
-    private static void send() throws IOException {
+    private static void sendBuffer() throws IOException {
         send(buffer);
     }
 
@@ -212,7 +223,7 @@ public class UnicastBMVNoBytes {
         b.clear();
     }
 
-    private byte readData(DataInputStream in) throws IOException {
+    private byte readBytes(DataInputStream in) throws IOException {
         for (;;) {
             try {
                 return in.readByte();
@@ -222,7 +233,7 @@ public class UnicastBMVNoBytes {
         }
     }
 
-    private void loop() throws IOException {
+    private void loopFactory() throws IOException {
         final DataInputStream in = new DataInputStream(clientSocket.getInputStream());
         while (connected == true && clientSocket.isConnected() == true) {
             byte[] header = new byte[17];
@@ -329,9 +340,8 @@ public class UnicastBMVNoBytes {
                         byte messageToDecode[] = Arrays.copyOfRange(messagehelper, 2, size + 2);
                         ByteBuffer message = ByteBuffer.wrap(messageToDecode);
 
-                        Potocol protocol = new BMVNoBytes();
+                        Potocol protocol = new DecoderINTRABMV();
                         String JSONmessage = protocol.parse(message, Long.parseLong(seqNum + ""));
-                        //System.out.println("[RECOVERY-MESSAGE]" + JSONmessage);
                         System.out.println("," + JSONmessage);
 
                         if (mip > 1) {
@@ -554,7 +564,7 @@ public class UnicastBMVNoBytes {
 
     public void start() throws IOException {
         LoginRequest(Group, Username, Password);
-        loop();
+        loopFactory();
 
     }
 
@@ -573,14 +583,6 @@ public class UnicastBMVNoBytes {
 
     }
 
-    /**
-     *
-     * @author Juan Jesús Martínez Serrano / juanjmtzs@gmail.com
-     * @param args
-     * @throws java.io.IOException
-     *
-     *
-     */
     public void StartHandling(String[] args) throws IOException {
         clientSocket = new Socket();
         buffer = ByteBuffer.allocate(4 * 1024);
@@ -589,13 +591,13 @@ public class UnicastBMVNoBytes {
             final UnicastBMVNoBytes s;
             switch (args.length) {
                 case 7:
-                    s = new UnicastBMVNoBytes(args[3], args[4], args[5], args[0], Integer.parseInt(args[1]), new BMVNoBytes(), args[6]);
+                    s = new UnicastBMVNoBytes(args[3], args[4], args[5], args[0], Integer.parseInt(args[1]), new DecoderINTRABMV(), args[6]);
                     break;
                 case 9:
-                    s = new UnicastBMVNoBytes(args[3], args[4], args[5], args[0], Integer.parseInt(args[1]), new BMVNoBytes(), args[6], args[7], args[8]);
+                    s = new UnicastBMVNoBytes(args[3], args[4], args[5], args[0], Integer.parseInt(args[1]), new DecoderINTRABMV(), args[6], args[7], args[8]);
                     break;
                 default:
-                    s = new UnicastBMVNoBytes(args[3], args[4], args[5], args[0], Integer.parseInt(args[1]), new BMVNoBytes(), args[6], args[7], args[8], args[9]);
+                    s = new UnicastBMVNoBytes(args[3], args[4], args[5], args[0], Integer.parseInt(args[1]), new DecoderINTRABMV(), args[6], args[7], args[8], args[9]);
                     break;
             }
             Runtime.getRuntime().addShutdownHook(new Thread() {
