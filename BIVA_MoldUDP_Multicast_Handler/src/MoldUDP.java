@@ -137,7 +137,7 @@ public class MoldUDP {
                                             argsRecovery[2] = MoldUDP.session;
                                             argsRecovery[3] = request + "";
                                             argsRecovery[4] = finalSeq + "";
-                                            RequesterMoldUDP.StartHandling(argsRecovery);
+                                            new RequesterMoldUDP().StartHandling(argsRecovery);
 
                                         } catch (Exception ex) {
                                         }
